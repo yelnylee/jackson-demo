@@ -29,14 +29,20 @@ import java.util.Map;
  * @date 8/22/2022
  */
 public class ExtendableBean {
+
+
+
     public String name;
     private Map<String, String> properties;
+    private Map<String, String> unStandardProperties;
 
-    public ExtendableBean(String name) {
-        this.name = name;
+
+    public String getName() {
+        return name;
     }
 
-    public ExtendableBean() {
+    public void setName(String name) {
+        this.name = name;
     }
 
     @JsonAnyGetter
@@ -45,9 +51,24 @@ public class ExtendableBean {
     }
 
     public void add(String key, String value) {
+
         if(properties==null){
             properties = new HashMap<>();
         }
+        if(unStandardProperties==null){
+            unStandardProperties = new HashMap<>();
+        }
+
         properties.put(key,value);
+        unStandardProperties.put(key,value);
+    }
+
+    public Map<String, String> getUnStandardProperties() {
+        return unStandardProperties;
+    }
+
+    public void setUnStandardProperties(
+        Map<String, String> unStandardProperties) {
+        this.unStandardProperties = unStandardProperties;
     }
 }
