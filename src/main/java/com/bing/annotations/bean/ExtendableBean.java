@@ -20,6 +20,7 @@
 package com.bing.annotations.bean;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,12 +31,9 @@ import java.util.Map;
  */
 public class ExtendableBean {
 
-
-
     public String name;
     private Map<String, String> properties;
-    private Map<String, String> unStandardProperties;
-
+    private Map<String, String> unStandardProperties = new HashMap<>();
 
     public String getName() {
         return name;
@@ -50,17 +48,13 @@ public class ExtendableBean {
         return properties;
     }
 
+    @JsonAnySetter
     public void add(String key, String value) {
 
         if(properties==null){
             properties = new HashMap<>();
         }
-        if(unStandardProperties==null){
-            unStandardProperties = new HashMap<>();
-        }
-
         properties.put(key,value);
-        unStandardProperties.put(key,value);
     }
 
     public Map<String, String> getUnStandardProperties() {
@@ -70,5 +64,15 @@ public class ExtendableBean {
     public void setUnStandardProperties(
         Map<String, String> unStandardProperties) {
         this.unStandardProperties = unStandardProperties;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ExtendableBean{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", properties=").append(properties);
+        sb.append(", unStandardProperties=").append(unStandardProperties);
+        sb.append('}');
+        return sb.toString();
     }
 }
