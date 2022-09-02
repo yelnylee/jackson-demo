@@ -1,10 +1,11 @@
-package com.bing.annotations.bean;
+package com.bing.annotations.jsonallgetter;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
 import cn.hutool.core.io.resource.ResourceUtil;
+import com.bing.annotations.bean.ExtendableBean;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -49,8 +50,5 @@ class ExtendableBeanTest {
         assertThat(result.getProperties().get("attr1"), containsString("val1"));
         assertThat(result.getUnStandardProperties().get("attr2"), containsString("val2"));
     }
-
-
-
 
 }
